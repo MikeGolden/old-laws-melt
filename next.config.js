@@ -1,4 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+const { createSecureHeaders } = require('next-secure-headers');
 
-module.exports = nextConfig
+/** @type {import('next').NextConfig} */
+module.exports = {
+  async headers() {
+    return [{ source: '/(.*)', headers: createSecureHeaders() }];
+  },
+  images: {
+    dangerouslyAllowSVG: true,
+    domains: ['vercel.com'],
+  },
+};
